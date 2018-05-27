@@ -1,0 +1,26 @@
+{
+  "name": "mock-react-redux",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tom-mckinney/mock-react-redux.git"
+  },
+  "keywords": [],
+  "author": "Tom McKinney, Elyption",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tom-mckinney/mock-react-redux/issues"
+  },
+  "homepage": "https://github.com/tom-mckinney/mock-react-redux#readme",
+  "devDependencies": {
+    "enzyme": "^3.3.0",
+    "jest": "^23.0.0",
+    "typescript": "^2.8.3"
+  }
+}
