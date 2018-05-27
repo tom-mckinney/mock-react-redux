@@ -1,5 +1,5 @@
 const mockReactRedux = () => {
-  return 'Wumbo';
+  return "Wumbo";
 };
 
 export default mockReactRedux;

@@ -6,7 +6,9 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "test": "jest"
+    "pretest": "tslint -c tslint.yaml -p './tsconfig.json'",
+    "test": "jest",
+    "lint-fix": "tslint -c tslint.yaml -p './tsconfig.json' --fix"
   },
   "repository": {
     "type": "git",
@@ -23,10 +25,11 @@
     "@types/react": "^16.3.14",
     "@types/react-dom": "^16.0.5",
     "@types/react-redux": "^6.0.0",
-    "jest-enzyme": "^6.0.1",
+    "@types/react-router": "^4.0.25",
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
     "react-redux": "^5.0.7",
+    "react-router": "^4.2.0",
     "redux": "^4.0.0"
   },
   "devDependencies": {
@@ -36,7 +39,11 @@
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
     "jest": "^22.4.2",
+    "jest-enzyme": "^6.0.1",
     "ts-jest": "^22.4.6",
+    "tslint": "^5.10.0",
+    "tslint-eslint-rules": "^5.3.1",
+    "tslint-react": "^3.6.0",
     "typescript": "^2.8.3"
   },
   "jest": {
@@ -44,7 +51,7 @@
       "^.+\\.tsx?$": "ts-jest"
     },
     "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
-    "setupTestFrameworkScriptFile": "<rootDir>src/setupTests.ts",
+    "setupTestFrameworkScriptFile": "<rootDir>/config/setupTests.ts",
     "moduleFileExtensions": [
       "ts",
       "tsx",
