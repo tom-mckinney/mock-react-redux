@@ -1,6 +1,6 @@
 import * as React from "react";
 import { connect } from "react-redux";
-import { Switch, Route } from "react-router";
+import { Switch, Route, Router } from "react-router";
 import { push, RouterAction } from "react-router-redux";
 import { mount } from "enzyme";
 
@@ -49,3 +49,8 @@ it("navigates to another location when the push action is dispatched", () => {
 
   expect(wrapper.find(Bar)).toExist();
 });
+
+it("can spy on route changes", () => {
+  const routeMatch = jest.spyOn(Router.prototype, "computeMatch");
+  const wrapper = mount(<JestReduxRouter location="/foo"><ConnectedTestComponent /></JestReduxRouter>);
+})

@@ -1,5 +1,1 @@
-const mockReactRedux = () => {
-  return "Wumbo";
-};
-
-export default mockReactRedux;
+export * from "./modules/JestReduxRouter";
