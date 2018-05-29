@@ -1,10 +1,10 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import { Switch, Route, Router } from "react-router";
-import { push, RouterAction } from "react-router-redux";
+import { push, RouterAction, ConnectedRouter } from "react-router-redux";
 import { mount } from "enzyme";
 
-import JestReduxRouter, { JestReduxRouterState } from "./JestReduxRouter";
+import ConnectedRouterSpy, { ConnectedRouterSpyState } from "./ConnectedRouterSpy";
 
 const Foo: React.SFC<TestComponentProps> = ({ navigate }) => (
   <div>
@@ -31,17 +31,17 @@ type NavigationProps = {
   navigate: (route: string) => RouterAction
 };
 
-type TestComponentProps = JestReduxRouterState & NavigationProps;
+type TestComponentProps = ConnectedRouterSpyState & NavigationProps;
 
 const ConnectedTestComponent = connect(
-  (state: JestReduxRouterState) => state,
+  (state: ConnectedRouterSpyState) => state,
   (dispatch) => ({
     navigate: (route: string) => dispatch(push(route))
   })
 )(TestComponent);
 
 it("navigates to another location when the push action is dispatched", () => {
-  const wrapper = mount(<JestReduxRouter location="/foo"><ConnectedTestComponent /></JestReduxRouter>);
+  const wrapper = mount(<ConnectedRouterSpy location="/foo"><ConnectedTestComponent /></ConnectedRouterSpy>);
 
   expect(wrapper.find(Foo)).toExist();
 
@@ -49,8 +49,3 @@ it("navigates to another location when the push action is dispatched", () => {
 
   expect(wrapper.find(Bar)).toExist();
 });
-
-it("can spy on route changes", () => {
-  const routeMatch = jest.spyOn(Router.prototype, "computeMatch");
-  const wrapper = mount(<JestReduxRouter location="/foo"><ConnectedTestComponent /></JestReduxRouter>);
-})

@@ -4,11 +4,11 @@ import { Provider } from "react-redux";
 import { routerReducer, RouterState, ConnectedRouter, routerMiddleware } from "react-router-redux";
 import { createMemoryHistory, MemoryHistory } from "history";
 
-export interface JestReduxRouterProps {
+export interface ConnectedRouterSpyProps {
   location?: string;
 }
 
-export interface JestReduxRouterState {
+export interface ConnectedRouterSpyState {
   router: RouterState;
 }
 
@@ -16,15 +16,15 @@ const reducers: ReducersMapObject = {
   router: routerReducer
 };
 
-class JestReduxRouter extends  React.Component<JestReduxRouterProps> {
+class ConnectedRouterSpy extends  React.Component<ConnectedRouterSpyProps> {
   history: MemoryHistory;
-  constructor(props: JestReduxRouterProps) {
+  constructor(props: ConnectedRouterSpyProps) {
     super(props);
 
     this.history = createMemoryHistory({ initialEntries: [this.props.location || "/"] });
   }
   render() {
-    const history = createStore(combineReducers(reducers), applyMiddleware(routerMiddleware(this.history))) as Store<JestReduxRouterState>;
+    const history = createStore(combineReducers(reducers), applyMiddleware(routerMiddleware(this.history))) as Store<ConnectedRouterSpyState>;
     return (
       <Provider store={history}>
         <ConnectedRouter history={this.history}>
@@ -35,4 +35,4 @@ class JestReduxRouter extends  React.Component<JestReduxRouterProps> {
   }
 }
 
-export default JestReduxRouter;
+export default ConnectedRouterSpy;

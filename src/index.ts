@@ -1,1 +1,1 @@
-export * from "./modules/JestReduxRouter";
+export * from "./modules/ConnectedRouterSpy";

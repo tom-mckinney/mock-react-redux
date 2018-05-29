@@ -12,15 +12,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tom-mckinney/mock-react-redux.git"
+    "url": "git+https://github.com/tom-mckinney/react-router-spy.git"
   },
   "keywords": [],
   "author": "Tom McKinney, Elyption",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/tom-mckinney/mock-react-redux/issues"
+    "url": "https://github.com/tom-mckinney/react-router-spy/issues"
   },
-  "homepage": "https://github.com/tom-mckinney/mock-react-redux#readme",
+  "homepage": "https://github.com/tom-mckinney/react-router-spy#readme",
   "dependencies": {
     "@types/react": "^16.3.14",
     "@types/react-dom": "^16.0.5",
