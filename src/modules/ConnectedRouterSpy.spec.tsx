@@ -1,7 +1,7 @@
 import * as React from "react";
 import { connect } from "react-redux";
-import { Switch, Route, Router } from "react-router";
-import { push, RouterAction, ConnectedRouter } from "react-router-redux";
+import { Switch, Route, Router, Redirect } from "react-router";
+import { push, RouterAction } from "react-router-redux";
 import { mount } from "enzyme";
 
 import ConnectedRouterSpy, { ConnectedRouterSpyState } from "./ConnectedRouterSpy";
@@ -24,6 +24,7 @@ const TestComponent: React.SFC<TestComponentProps> = (props) => (
   <Switch>
     <Route path="/foo" render={() => <Foo {...props} />} />
     <Route path="/bar" render={() => <Bar {...props} />} />
+    <Route path="/" render={() => <Redirect to="/bar" />} />
   </Switch>
 );
 
@@ -40,12 +41,33 @@ const ConnectedTestComponent = connect(
   })
 )(TestComponent);
 
-it("navigates to another location when the push action is dispatched", () => {
-  const wrapper = mount(<ConnectedRouterSpy location="/foo"><ConnectedTestComponent /></ConnectedRouterSpy>);
+describe("ConnectedRouterSpy", () => {
+  it("starts on whichever location is passed", () => {
+    const wrapper = mount(<ConnectedRouterSpy location="/foo"><ConnectedTestComponent /></ConnectedRouterSpy>);
 
-  expect(wrapper.find(Foo)).toExist();
+    expect(wrapper.find(Foo)).toExist();
+  });
 
-  wrapper.find("button").simulate("click");
+  it("handles redirects appropriatly", () => {
+    const wrapper = mount(<ConnectedRouterSpy><ConnectedTestComponent /></ConnectedRouterSpy>);
 
-  expect(wrapper.find(Bar)).toExist();
+    expect(wrapper.find(Bar)).toExist();
+  });
+
+  it("navigates to another location when the push action is dispatched", () => {
+    const wrapper = mount(<ConnectedRouterSpy location="/foo"><ConnectedTestComponent /></ConnectedRouterSpy>);
+
+    expect(wrapper.find(Foo)).toExist();
+    wrapper.find("button").simulate("click");
+
+    expect(wrapper.find(Bar)).toExist();
+  });
+
+  it("can spy on matched routes", () => {
+    const computeMatch = jest.spyOn(Router.prototype as any, "computeMatch");
+
+    mount(<ConnectedRouterSpy location="/foo"><ConnectedTestComponent /></ConnectedRouterSpy>);
+
+    expect(computeMatch).toBeCalledWith("/foo");
+  });
 });
