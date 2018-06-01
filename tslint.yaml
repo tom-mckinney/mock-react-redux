@@ -21,3 +21,4 @@ rules:
   interface-over-type-literal: false
   interface-name: false
   member-access: false
+  no-shadow-variables: false

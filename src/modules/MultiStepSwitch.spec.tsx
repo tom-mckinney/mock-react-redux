@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { Route } from "react-router";
 import { RouterAction, push } from "react-router-redux";
@@ -26,12 +26,12 @@ const Step3: React.SFC<TestComponentProps> = ({ navigate }) => (
 );
 
 const MultiSteps: React.SFC<TestComponentProps> = (props) => (
-  <Fragment>
+  <>
     <Route path="/step-1" render={() => <Step1 {...props} />} />
     <Route path="/step-2" render={() => <Step2 {...props} />} />
     <Route path="/step-3" render={() => <Step3 {...props} />} />
     <Route path="/done" render={() => <span>Job's done.</span>} />
-  </Fragment>
+  </>
 );
 
 const ConnectedMultiSteps = connect(
@@ -44,7 +44,7 @@ const ConnectedMultiSteps = connect(
 it("renders the first step", () => {
   const wrapper = mount(
     <ConnectedRouterSpy location="/step-1">
-      <MultiStepSwitch furthestStep={0}>
+      <MultiStepSwitch>
         <ConnectedMultiSteps />
       </MultiStepSwitch>
     </ConnectedRouterSpy>
